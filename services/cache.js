@@ -15,7 +15,7 @@ const exec = mongoose.Query.prototype.exec;
 mongoose.Query.prototype.exec = function () {
 
   //Create a unique key from mongoose collection name and query options  
-  const key = Object.assign({}, this.getQuery(), {
+  const key = JSON.stringify(Object.assign({}, this.getQuery(), {
     collection: this.mongooseCollection.name,
   });
   
