@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 
+
 const Blog = mongoose.model("Blog");
 
 module.exports = (app) => {
