@@ -22,7 +22,7 @@ mongoose.Query.prototype.exec = async function () {
 
   //save the value for the key in cacheValue if it exists
   const cacheValue = await client.get(key);
- 
+
   //return the value if it exists
   if (cacheValue) {
     const doc = JSON.parse(cacheValue);
@@ -34,4 +34,8 @@ mongoose.Query.prototype.exec = async function () {
 
   //issue the query and store the results in redis server
   const result = await exec.apply(this, arguments);
+
+  //set the result of mongoose query exec into redis
+  client.set(key, JSON.stringify(result));
+  return result;
 };
