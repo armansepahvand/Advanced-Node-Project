@@ -16,10 +16,21 @@ afterEach(async () => {
   await browser.close();
 });
 
-test("we can launch a browser", async () => {
+test("the Header has the correct test", async () => {
   //get the text from an a tag inside of the header
   const text = await page.$eval("a.brand-logo", (el) => el.innerHTML);
 
   //make assertion for the text
   expect(text).toEqual("Blogster");
+});
+
+test("clicking login starts oauth flow", async () => {
+  //Click on the login link
+  await page.click(".right a");
+
+  //save the oauth login url in a variable
+  const url = await page.url();
+
+  //check if the url has the "accounts.google.com" sting in it
+  expect(url).toMatch(/accounts\.google\.com/);
 });
