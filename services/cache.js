@@ -23,6 +23,14 @@ mongoose.Query.prototype.exec = async function () {
   //save the value for the key in cacheValue if it exists
   const cacheValue = await client.get(key);
  
+  //return the value if it exists
+  if (cacheValue) {
+    const doc = JSON.parse(cacheValue);
+
+    return Array.isArray(doc)
+      ? doc.map((d) => new this.model(d))
+      : new this.model(doc);
+  }
 
   return exec.apply(this, arguments);
 };
