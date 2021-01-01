@@ -5,4 +5,6 @@ test("we can launch a browser", async () => {
     headless: false,
   });
   const page = await browser.newPage();
+  //open the main page of the app
+  await page.goto("localhost:3000");
 });
