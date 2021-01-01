@@ -12,7 +12,15 @@ client.get = util.promisify(client.get);
 //save the mongoose query exec prototype function into a constant
 const exec = mongoose.Query.prototype.exec;
 
+mongoose.Query.prototype.cache = function () {
+  this.useCache = true;
+  return this;
+};
+
 mongoose.Query.prototype.exec = async function () {
+  if (!this.useCache) {
+    return exec.apply(this, arguments);
+  }
   //Create a unique key from mongoose collection name and query options
   const key = JSON.stringify(
     Object.assign({}, this.getQuery(), {
