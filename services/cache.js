@@ -32,5 +32,6 @@ mongoose.Query.prototype.exec = async function () {
       : new this.model(doc);
   }
 
-  return exec.apply(this, arguments);
+  //issue the query and store the results in redis server
+  const result = await exec.apply(this, arguments);
 };
