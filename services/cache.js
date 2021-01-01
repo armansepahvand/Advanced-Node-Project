@@ -20,6 +20,8 @@ mongoose.Query.prototype.exec = async function () {
     })
   );
 
+  //save the value for the key in cacheValue if it exists
+  const cacheValue = await client.get(key);
  
 
   return exec.apply(this, arguments);
