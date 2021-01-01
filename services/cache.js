@@ -45,7 +45,7 @@ mongoose.Query.prototype.exec = async function () {
   //issue the query and store the results in redis server
   const result = await exec.apply(this, arguments);
 
-  //set the result of mongoose query exec into redis
-  client.set(key, JSON.stringify(result));
+  //set the result of mongoose query exec into redis and set the expiery to 10 second
+  client.set(key, JSON.stringify(result), "EX", 10);
   return result;
 };
