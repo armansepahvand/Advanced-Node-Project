@@ -12,12 +12,14 @@ client.get = util.promisify(client.get);
 //save the mongoose query exec prototype function into a constant
 const exec = mongoose.Query.prototype.exec;
 
+//prototype function to set cache to true for each query that applies this function
 mongoose.Query.prototype.cache = function () {
   this.useCache = true;
   return this;
 };
 
 mongoose.Query.prototype.exec = async function () {
+  //if the the route does not aplly the cache function return run the original exec function
   if (!this.useCache) {
     return exec.apply(this, arguments);
   }
