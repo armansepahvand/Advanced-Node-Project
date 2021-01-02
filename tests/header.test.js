@@ -13,7 +13,7 @@ beforeEach(async () => {
 
 //close browser afgter each test
 afterEach(async () => {
-  await browser.close();
+  //await browser.close();
 });
 
 test("the Header has the correct test", async () => {
@@ -35,9 +35,9 @@ test("clicking login starts oauth flow", async () => {
   expect(url).toMatch(/accounts\.google\.com/);
 });
 
-test("When signed in, shows logout button", async () => {
+test.only("When signed in, shows logout button", async () => {
   //sdave the user id from one of the users into constant id
-  const id = "5fee4ebd1e5dc724dcb0e97d";
+  const id = "5fee4d461e5dc724dcb0e97c";
 
   //require Buffer library
   const Buffer = require("safe-buffer").Buffer;
@@ -53,4 +53,27 @@ test("When signed in, shows logout button", async () => {
   const sessionString = Buffer.from(JSON.stringify(sessionObject)).toString(
     "base64"
   );
+
+  //Use Keygrip to generate our cookie singnature
+  const Keygrip = require("keygrip");
+  const keys = require("../config/dev");
+  const keygrip = new Keygrip([keys.cookieKey]);
+  const sig = keygrip.sign("session=" + sessionString);
+
+  //set the session cookie
+  await page.setCookie({
+    name: "session",
+    value: sessionString,
+    Domain: "localhost",
+  });
+
+  //set the session.sig cookie
+  await page.setCookie({
+    name: "session.sig",
+    value: sig,
+    Domain: "localhost",
+  });
+
+  //refresh the page
+  await page.goto("localhost:3000");
 });
