@@ -77,6 +77,7 @@ test("When signed in, shows logout button", async () => {
   //refresh the page
   await page.goto("localhost:3000");
 
+  //wait for the page to fully load before looking for the target tag
   await page.waitFor('a[href="/auth/logout"]');
 
   //get the text from an a tag inside of the header
