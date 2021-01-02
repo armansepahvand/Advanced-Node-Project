@@ -34,3 +34,23 @@ test("clicking login starts oauth flow", async () => {
   //check if the url has the "accounts.google.com" sting in it
   expect(url).toMatch(/accounts\.google\.com/);
 });
+
+test("When signed in, shows logout button", async () => {
+  //sdave the user id from one of the users into constant id
+  const id = "5fee4ebd1e5dc724dcb0e97d";
+
+  //require Buffer library
+  const Buffer = require("safe-buffer").Buffer;
+
+  //create a session Object
+  const sessionObject = {
+    passport: {
+      user: id,
+    },
+  };
+
+  //translate the session Object to a session string
+  const sessionString = Buffer.from(JSON.stringify(sessionObject)).toString(
+    "base64"
+  );
+});
