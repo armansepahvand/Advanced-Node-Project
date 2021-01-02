@@ -2,7 +2,7 @@ const Buffer = require("safe-buffer").Buffer;
 
 //Use Keygrip to generate our cookie singnature
 const Keygrip = require("keygrip");
-const keys = require("../../config/keys");
+const keys = require("../../config/dev");
 const keygrip = new Keygrip([keys.cookieKey]);
 
 module.exports = (user) => {
