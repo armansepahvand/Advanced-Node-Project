@@ -1,5 +1,7 @@
+const { use } = require("passport");
 const puppeteer = require("puppeteer");
 const sessionFactory = require("./factories/sessionFactory");
+const userFactory = require("./factories/userFactory");
 let browser, page;
 
 //Initiate the browser befiore each test
@@ -36,8 +38,10 @@ test("clicking login starts oauth flow", async () => {
   expect(url).toMatch(/accounts\.google\.com/);
 });
 
-test("When signed in, shows logout button", async () => {
-  const { session, sig } = sessionFactory();
+test.only("When signed in, shows logout button", async () => {
+  const user = await userFactory();
+  console.log(user);
+  const { session, sig } = sessionFactory(user);
 
   //set the session cookie
   await page.setCookie({
