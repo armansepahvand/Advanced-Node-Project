@@ -13,7 +13,7 @@ beforeEach(async () => {
 
 //close browser afgter each test
 afterEach(async () => {
-  //await browser.close();
+  await browser.close();
 });
 
 test("the Header has the correct test", async () => {
@@ -35,7 +35,7 @@ test("clicking login starts oauth flow", async () => {
   expect(url).toMatch(/accounts\.google\.com/);
 });
 
-test.only("When signed in, shows logout button", async () => {
+test("When signed in, shows logout button", async () => {
   //sdave the user id from one of the users into constant id
   const id = "5fee4d461e5dc724dcb0e97c";
 
@@ -76,4 +76,12 @@ test.only("When signed in, shows logout button", async () => {
 
   //refresh the page
   await page.goto("localhost:3000");
+
+  await page.waitFor('a[href="/auth/logout"]');
+
+  //get the text from an a tag inside of the header
+  const text = await page.$eval('a[href="/auth/logout"]', (el) => el.innerHTML);
+
+  //make assertion for the text
+  expect(text).toEqual("Logout");
 });
