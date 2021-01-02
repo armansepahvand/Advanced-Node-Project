@@ -27,7 +27,7 @@ test("the Header has the correct test", async () => {
   expect(text).toEqual("Blogster");
 });
 
-test("clicking login starts oauth flow", async () => {
+test.skip("clicking login starts oauth flow", async () => {
   //Click on the login link
   await page.click(".right a");
 
@@ -38,7 +38,7 @@ test("clicking login starts oauth flow", async () => {
   expect(url).toMatch(/accounts\.google\.com/);
 });
 
-test.only("When signed in, shows logout button", async () => {
+test("When signed in, shows logout button", async () => {
   const user = await userFactory();
   console.log(user);
   const { session, sig } = sessionFactory(user);
