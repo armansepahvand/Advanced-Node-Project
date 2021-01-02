@@ -40,25 +40,7 @@ test("When signed in, shows logout button", async () => {
   const id = "5fee4d461e5dc724dcb0e97c";
 
   //require Buffer library
-  const Buffer = require("safe-buffer").Buffer;
-
-  //create a session Object
-  const sessionObject = {
-    passport: {
-      user: id,
-    },
-  };
-
-  //translate the session Object to a session string
-  const sessionString = Buffer.from(JSON.stringify(sessionObject)).toString(
-    "base64"
-  );
-
-  //Use Keygrip to generate our cookie singnature
-  const Keygrip = require("keygrip");
-  const keys = require("../config/dev");
-  const keygrip = new Keygrip([keys.cookieKey]);
-  const sig = keygrip.sign("session=" + sessionString);
+ 
 
   //set the session cookie
   await page.setCookie({
