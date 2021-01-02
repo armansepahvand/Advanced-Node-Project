@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const sessionFactory = require("./factories/sessionFactory");
 let browser, page;
 
 //Initiate the browser befiore each test
@@ -36,16 +37,12 @@ test("clicking login starts oauth flow", async () => {
 });
 
 test("When signed in, shows logout button", async () => {
-  //sdave the user id from one of the users into constant id
-  const id = "5fee4d461e5dc724dcb0e97c";
-
-  //require Buffer library
- 
+  const { session, sig } = sessionFactory();
 
   //set the session cookie
   await page.setCookie({
     name: "session",
-    value: sessionString,
+    value: session,
     Domain: "localhost",
   });
 
