@@ -5,11 +5,11 @@ const Keygrip = require("keygrip");
 const keys = require("../../config/keys");
 const keygrip = new Keygrip([keys.cookieKey]);
 
-module.exports = () => {
+module.exports = (user) => {
   //create a session Object
   const sessionObject = {
     passport: {
-      user: id,
+      user: user._id.toString(),
     },
   };
 
