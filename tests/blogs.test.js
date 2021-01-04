@@ -11,3 +11,17 @@ beforeEach(async () => {
 afterEach(async () => {
   await page.close();
 });
+
+describe("when logged in", async () => {
+  beforeEach(async () => {
+    await page.login();
+    await page.goto("localhost:3000/blogs");
+    await page.click("a.btn-floating");
+  });
+
+  test("Can see blog craete form", async () => {
+    const lable = await page.getContentsOf("form label");
+
+    expect(lable).toEqual("Blog Title");
+  });
+});
