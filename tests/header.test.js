@@ -14,6 +14,15 @@ afterEach(async () => {
   await page.close();
 });
 
+test("When signed in, shows logout button", async () => {
+  await page.login();
+  //get the text from an a tag inside of the header
+  const text = await page.getContentsOf('a[href="/auth/logout"]');
+
+  //make assertion for the text
+  expect(text).toEqual("Logout");
+});
+
 test("the Header has the correct test", async () => {
   //get the text from an a tag inside of the header
   const text = await page.getContentsOf("a.brand-logo");
@@ -22,7 +31,7 @@ test("the Header has the correct test", async () => {
   expect(text).toEqual("Blogster");
 });
 
-test.skip("clicking login starts oauth flow", async () => {
+test("clicking login starts oauth flow", async () => {
   //Click on the login link
   await page.click(".right a");
 
@@ -31,13 +40,4 @@ test.skip("clicking login starts oauth flow", async () => {
 
   //check if the url has the "accounts.google.com" sting in it
   expect(url).toMatch(/accounts\.google\.com/);
-});
-
-test("When signed in, shows logout button", async () => {
-  await page.login();
-  //get the text from an a tag inside of the header
-  const text = await page.getContentsOf('a[href="/auth/logout"]');
-
-  //make assertion for the text
-  expect(text).toEqual("Logout");
 });
