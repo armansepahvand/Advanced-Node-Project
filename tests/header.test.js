@@ -6,7 +6,7 @@ let page;
 
 //Initiate the browser befiore each test
 beforeEach(async () => {
-  page=await Page.build();
+  page = await Page.build();
   await page.goto("localhost:3000");
 });
 
@@ -23,7 +23,7 @@ test("the Header has the correct test", async () => {
   expect(text).toEqual("Blogster");
 });
 
-test.skip("clicking login starts oauth flow", async () => {
+test("clicking login starts oauth flow", async () => {
   //Click on the login link
   await page.click(".right a");
 
