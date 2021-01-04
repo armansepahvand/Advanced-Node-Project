@@ -11,7 +11,7 @@ class CustomPage {
     const page = await browser.newPage();
 
     //create a ne custumePage object
-    const custumPage = new CustomPage(page);
+    const customPage = new CustomPage(page);
 
     // a proxy to return the proper function from one of the browser, page or
     //custompage functions using proxy method
