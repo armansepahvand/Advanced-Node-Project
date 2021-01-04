@@ -6,3 +6,4 @@ const keys = require("../config/dev");
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
 jest.setTimeout(15000);
+Number.prototype._called = {};
