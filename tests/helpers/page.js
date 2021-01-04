@@ -10,8 +10,8 @@ class CustomPage {
     //create a page instance from
     const page = await browser.newPage();
 
-    //create a ne custumePage object
-    const customPage = new CustomPage(page);
+    //create a new custumePage object
+    const customPage = new CustomPage(page, browser);
 
     // a proxy to return the proper function from one of the browser, page or
     //custompage functions using proxy method
@@ -22,8 +22,14 @@ class CustomPage {
     });
   }
 
-  constructor(page) {
+  constructor(page, browser) {
     this.page = page;
+    this.browser = browser;
+  }
+
+  //close function to close the browser on call
+  close() {
+    this.browser.close();
   }
 }
 
