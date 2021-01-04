@@ -36,7 +36,7 @@ class CustomPage {
 
   async login() {
     const user = await userFactory();
-    console.log(user);
+
     const { session, sig } = sessionFactory(user);
 
     //set the session cookie
