@@ -59,6 +59,10 @@ class CustomPage {
     //wait for the page to fully load before looking for the target tag
     await this.page.waitFor('a[href="/auth/logout"]');
   }
+
+  async getContentsOf(selector) {
+    return this.page.$eval(selector, (el) => el.innerHTML);
+  }
 }
 
 module.exports = CustomPage;

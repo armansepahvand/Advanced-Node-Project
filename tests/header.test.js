@@ -16,7 +16,7 @@ afterEach(async () => {
 
 test("the Header has the correct test", async () => {
   //get the text from an a tag inside of the header
-  const text = await page.$eval("a.brand-logo", (el) => el.innerHTML);
+  const text = await page.getContentsOf("a.brand-logo");
 
   //make assertion for the text
   expect(text).toEqual("Blogster");
@@ -36,7 +36,7 @@ test.skip("clicking login starts oauth flow", async () => {
 test("When signed in, shows logout button", async () => {
   await page.login();
   //get the text from an a tag inside of the header
-  const text = await page.$eval('a[href="/auth/logout"]', (el) => el.innerHTML);
+  const text = await page.getContentsOf('a[href="/auth/logout"]');
 
   //make assertion for the text
   expect(text).toEqual("Logout");
