@@ -24,4 +24,9 @@ describe("when logged in", async () => {
 
     expect(lable).toEqual("Blog Title");
   });
+
+  describe("And using invalid inputs", async () => {
+    beforeEach(async () => {});
+    test("The form shows an error message", async () => {});
+  });
 });
