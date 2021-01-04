@@ -1,22 +1,18 @@
 const { use } = require("passport");
-const puppeteer = require("puppeteer");
 const sessionFactory = require("./factories/sessionFactory");
 const userFactory = require("./factories/userFactory");
-let browser, page;
+const Page = require("./helpers/page");
+let page;
 
 //Initiate the browser befiore each test
 beforeEach(async () => {
-  browser = await puppeteer.launch({
-    headless: false,
-  });
-  page = await browser.newPage();
-  //open the main page of the app
+  page=await Page.build();
   await page.goto("localhost:3000");
 });
 
 //close browser afgter each test
 afterEach(async () => {
-  await browser.close();
+  await page.close();
 });
 
 test("the Header has the correct test", async () => {
