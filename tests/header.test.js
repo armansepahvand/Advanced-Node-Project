@@ -1,6 +1,5 @@
 const { use } = require("passport");
-const sessionFactory = require("./factories/sessionFactory");
-const userFactory = require("./factories/userFactory");
+
 const Page = require("./helpers/page");
 let page;
 
@@ -23,7 +22,7 @@ test("the Header has the correct test", async () => {
   expect(text).toEqual("Blogster");
 });
 
-test("clicking login starts oauth flow", async () => {
+test.skip("clicking login starts oauth flow", async () => {
   //Click on the login link
   await page.click(".right a");
 
@@ -35,30 +34,7 @@ test("clicking login starts oauth flow", async () => {
 });
 
 test("When signed in, shows logout button", async () => {
-  const user = await userFactory();
-  console.log(user);
-  const { session, sig } = sessionFactory(user);
-
-  //set the session cookie
-  await page.setCookie({
-    name: "session",
-    value: session,
-    Domain: "localhost",
-  });
-
-  //set the session.sig cookie
-  await page.setCookie({
-    name: "session.sig",
-    value: sig,
-    Domain: "localhost",
-  });
-
-  //refresh the page
-  await page.goto("localhost:3000");
-
-  //wait for the page to fully load before looking for the target tag
-  await page.waitFor('a[href="/auth/logout"]');
-
+  await page.login();
   //get the text from an a tag inside of the header
   const text = await page.$eval('a[href="/auth/logout"]', (el) => el.innerHTML);
 
