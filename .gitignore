@@ -1,8 +1,8 @@
 node_modules
 nohup.out
 .DS_Store
-config
+
 client/package-lock.json
-package-lock.json
+
 client/debug.log
 coverage
