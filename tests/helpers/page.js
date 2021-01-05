@@ -44,18 +44,16 @@ class CustomPage {
     await this.page.setCookie({
       name: "session",
       value: session,
-      Domain: "localhost",
     });
 
     //set the session.sig cookie
     await this.page.setCookie({
       name: "session.sig",
       value: sig,
-      Domain: "localhost",
     });
 
     //refresh the page
-    await this.page.goto("localhost:3000");
+    await this.page.goto("http://localhost:3000");
 
     //wait for the page to fully load before looking for the target tag
     await this.page.waitFor('a[href="/auth/logout"]');
