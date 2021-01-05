@@ -6,3 +6,4 @@ client/package-lock.json
 
 client/debug.log
 coverage
+config/dev.js
